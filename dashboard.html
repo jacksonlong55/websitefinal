@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+    <h1>Fitness/Strength Tracker</h1>
+    <h2>Dashboard Page</h2>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="dashboard.html" class="active">My Dashboard</a></li>
+            <li><a href="exercises.html">Input</a></li>
+            <li><a href="plans.html">Workout Plans</a></li>
+            <li><a href="progress.html">Progress Tracker</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <h2>Welcome there partner <span id="userName">User</span>!</h2>
+    <h3>Most recent workout:</h3>
+    <div id="recentWorkouts"></div>
+</main>
+<footer>
+    swipe to right for next page or left for previous</p>
+</footer>
+<script src="script.js"></script>
+<script>
+    fetch('create_api.php')
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            document.getElementById('recentWorkouts').innerHTML = `Most recent workout on ${data.data.workoutDate}: ${data.data.exercise} - ${data.data.reps} reps`;
+        } else {
+            document.getElementById('recentWorkouts').innerHTML = data.message;
+        }
+    })
+    .catch(error => console.error('Error:', error));
+</script>
+</body>
+</html>

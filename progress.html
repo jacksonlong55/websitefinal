@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progress Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+    <h1>Fitness/Strength Tracker</h1>
+    <h2>Progress Tracker Page</h2>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="dashboard.html" class="active">My Dashboard</a></li>
+            <li><a href="exercises.html">Input</a></li>
+            <li><a href="plans.html">Workout Plans</a></li>
+            <li><a href="progress.html">Progress Tracker</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <h2>Your Progress!!!</h2>
+    <p>Here is where we will construct graphs to show you your progress.</p>
+    <table id="recentWorkouts" class="table table-bordered table-condensed table-striped">
+        <thead>
+            <tr>
+                <th>SessionID</th>
+                <th>PlanID</th>
+                <th>Date</th>
+                <th>Duration</th>
+                <th>Notes</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</main>
+<main>
+    <h2>Add New Workout Session</h2>
+    <form action="insert_workout_session.php" method="post">
+        <label for="planID">Plan ID:</label>
+        <input type="number" id="planID" name="planID" required><br>
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" required><br>
+        <label for="duration">Duration:</label>
+        <input type="text" id="duration" name="duration" placeholder="e.g., 2 hours" required><br>
+        <label for="notes">Notes:</label>
+        <input type="text" id="notes" name="notes"><br>
+        <input type="submit" value="Add Workout Session">
+    </form>
+
+</main>
+<footer>
+    <p>swipe to right for next page or left for previous</p>
+</footer>
+<script src="script.js"></script>
+
+<script>
+    fetch('create_api2.php')
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            const workouts = data.data;
+            let tableHTML = '';
+            workouts.forEach(workout => {
+                tableHTML += `
+                    <tr>
+                        <td>${workout.SessionID}</td>
+                        <td>${workout.PlanID}</td>
+                        <td>${workout.Date}</td>
+                        <td>${workout.Duration}</td>
+                        <td>${workout.Notes}</td>
+                        <td><button class="btn btn-danger" onclick="deleteWorkout(${workout.SessionID})">Delete</button></td>
+                    </tr>`;
+            });
+            document.querySelector('#recentWorkouts tbody').innerHTML = tableHTML;
+        } else {
+            document.getElementById('recentWorkouts').innerHTML = `<tr><td colspan="6">${data.message}</td></tr>`;
+        }
+    })
+    .catch(error => console.error('Error:', error));
+
+    function deleteWorkout(sessionID) {
+        if (confirm('Are you sure you want to delete this workout session?')) {
+            fetch(`create_api2.php?sessionID=${sessionID}`, {
+                method: 'DELETE'
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    const row = document.querySelector(`#recentWorkouts tbody tr td:first-child:contains(${sessionID})`).parentNode;
+                    row.parentNode.removeChild(row);
+                } else {
+                    alert(data.message);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    }
+</script>
+</body>
+</html>
