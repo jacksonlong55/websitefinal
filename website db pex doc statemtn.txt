@@ -9,14 +9,15 @@
 - used this youtube video to help with the login https://www.youtube.com/watch?v=fC3j2U_UZrQ
 -used dr coffman notes to help with login and other functions for entering info in database
 - father programmer helped me write js code to be able to grab last previous workout from the databse and display on dashboard
--used this website for help on the login attemtps and help
+-used this website for help on the login attempts and help:https://phpgurukul.com/how-to-limit-login-attempt-using-php-and-mysql/
 -used this website for help with php files https://www.php.net/manual/en/mysqli.quickstart.statements.php
 -used this website https://www.w3schools.com/php/ to help with php commands and help with database
 -used this website for help to get data from databse and put on html files https://stackoverflow.com/questions/75885991/want-to-fetch-data-from-database-and-display-it-in-html-file
 - https://codeshack.io/secure-login-system-php-mysql/#creatingtheloginformdesign used this website for code for register and login help
 - also used https://codeshack.io/secure-login-system-php-mysql/#creatingtheloginformdesign for help on styles.css files for login and register pages
-
-
+- used this website for help with php mysql select functions: https://www.w3schools.com/php/php_mysql_select.asp
+- used these websites for help with CRUD operations code: https://www.codemag.com/article/1511031/CRUD-in-HTML-JavaScript-and-jQuery, https://www.scaler.com/topics/php-tutorial/crud-operation-in-php/, https://www.simplilearn.com/tutorials/php-tutorial/php-crud-operations
+- and this website for config.php: https://stackoverflow.com/questions/31376095/how-to-connect-to-mysql-database-in-php-using-mysqli-extension
 
 
 
