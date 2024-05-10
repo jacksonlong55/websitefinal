@@ -16,6 +16,13 @@ CREATE TABLE Exercise (
     DifficultyLevel VARCHAR(10)
 );
 
+CREATE TABLE workouts (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    workoutDate DATE NOT NULL,
+    exercise VARCHAR(50) NOT NULL,
+    reps INT NOT NULL CHECK (reps > 0)
+);
+
 CREATE TABLE Workout_Plan (
     PlanID INTEGER PRIMARY KEY,
     UserID INTEGER,
@@ -66,7 +73,7 @@ INSERT INTO User_Profile (UserID, Name, Email, Age, Gender, FitnessGoals)
 VALUES
 (1, 'Jackson Long', 'jmoney@gmail.com', 20, 'Male', 'Build muscle and get bigger', 'jacky', 'skinnyjack'),
 (2, 'Jalan Rivers', 'river@missippi.com', 21, 'Female', 'Lose weight and become skinny', 'jalan', 'sinnyjalan'),
-(3, 'Eric Willis', 'erocwillis@pringles.com', 22, 'Non-Practicing Gender Fluid', 'Improve chest strength', 'errric', 'skinnyeric');
+(3, 'Eric Willis', 'erocwillis@pringles.com', 22, 'Gender Fluid', 'Improve chest strength', 'errric', 'skinnyeric');
 
 INSERT INTO Exercise (ExerciseID, Name, Type, DifficultyLevel)
 VALUES
@@ -115,3 +122,8 @@ VALUES
 (2, 1, 4, 15, 5, INTERVAL '25 minutes'),
 (3, 2, 2, NULL, NULL, INTERVAL '15 minutes'),
 (4, 3, 3, NULL, NULL, INTERVAL '1 hour');
+
+INSERT INTO workouts (workoutDate, exercise, reps) VALUES 
+('2024-05-08', 'Squats', 10),
+('2024-05-08', 'Push-ups', 15),
+('2024-05-09', 'Deadlifts', 8);
